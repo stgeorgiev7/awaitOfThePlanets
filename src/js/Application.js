@@ -92,14 +92,13 @@ export default class Application extends EventEmitter {
   };
 
   _loading () {
-    var HTMLProgressElement = ({
+    const HTMLProgressElement = ({
       constructor: function() {
         var self = document.querySelector('progress');
         return self
       }
     })
     
-    return self;
   }
 
   _startLoading() {
