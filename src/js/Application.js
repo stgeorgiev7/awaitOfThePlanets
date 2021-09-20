@@ -39,31 +39,31 @@ export default class Application extends EventEmitter {
   
   async _load() {
     this._startLoading();
+
+    async function getData(point) {
+      const url = new URL(String(point));
+      const promise = await fetch(url, {
+        method: "GET",
+      });
+       return await promise.json();
+    };
+
     const planetsArray = [];
-    let data = await this._getData('https://swapi.boom.dev/api/planets');
+    let data = await getData('https://swapi.boom.dev/api/planets');
 
     planetsArray.push(data.results);
     
     while(this._checkIfNext(data) !== true) {
-      const currentData = await this._getData(data.next);
+      const currentData = await getData(data.next);
       planetsArray.push(currentData.results);
       data = await currentData;
     }
     
-    
     this._stopLoading();
-    
 
     return planetsArray;
   };
 
-  async _getData(point) {
-    const url = new URL(String(point));
-    const promise = await fetch(url, {
-      method: "GET",
-    });
-     return await promise.json();
-  };
 
   _checkIfNext(obj) {
     if (obj.next !== null) {
@@ -92,7 +92,9 @@ export default class Application extends EventEmitter {
   };
 
   _loading() {
-    document.querySelector('progress').style.display = 'none';
+    const progress = document.querySelector('progress');
+    progress.style.display = 'none';
+    return progress;
   }
 
   _startLoading() {
@@ -100,6 +102,7 @@ export default class Application extends EventEmitter {
   }
 
   _stopLoading() {
+
       this._loading();
   }
 
