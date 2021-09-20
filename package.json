@@ -67,6 +67,7 @@
   },
   "target": "web",
   "dependencies": {
-    "eventemitter3": "^4.0.7"
+    "eventemitter3": "^4.0.7",
+    "regenerator-runtime": "^0.13.9"
   }
 }
