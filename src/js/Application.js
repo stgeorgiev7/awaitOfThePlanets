@@ -11,8 +11,9 @@ export default class Application extends EventEmitter {
 
   constructor() {
     super();
-    this._loading();
     this._create();
+    this._loading = document.querySelector('progress');
+   
     this.emit(Application.events.READY);
   }
 
@@ -90,16 +91,6 @@ export default class Application extends EventEmitter {
     document.body.querySelector(".main").appendChild(box);
 
   };
-
-  _loading () {
-    const HTMLProgressElement = ({
-      constructor: function() {
-        var self = document.querySelector('progress');
-        return self
-      }
-    })
-    
-  }
 
   _startLoading() {
     document.querySelector('progress').style.display = 'block';
