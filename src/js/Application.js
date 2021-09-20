@@ -1,5 +1,5 @@
 import 'regenerator-runtime/runtime'
-import EventEmitter from "eventemitter3";
+import EventEmitter, { prototype } from "eventemitter3";
 import image from "../images/planet.svg";
 
 export default class Application extends EventEmitter {
@@ -91,9 +91,9 @@ export default class Application extends EventEmitter {
 
   };
 
-  _loading() {
+  _loading () {
     const progress = document.querySelector('progress');
-    progress.style.display = 'none';
+    this._stopLoading();
     return progress;
   }
 
@@ -102,8 +102,7 @@ export default class Application extends EventEmitter {
   }
 
   _stopLoading() {
-
-      this._loading();
+    document.querySelector('progress').style.display = 'none';
   }
 
 
