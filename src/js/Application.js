@@ -92,9 +92,13 @@ export default class Application extends EventEmitter {
   };
 
   _loading () {
-    const progress = document.querySelector('progress');
-    this._stopLoading();
-    return progress;
+    const HTMLProgressElement = ({
+      constructor: function() {
+        var self = document.querySelector('progress');
+        return self
+      }
+    })
+    
   }
 
   _startLoading() {
@@ -104,7 +108,5 @@ export default class Application extends EventEmitter {
   _stopLoading() {
     document.querySelector('progress').style.display = 'none';
   }
-
-
 
 };
